@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saint Hunt - App Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #2c1810 0%, #1a3a3a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            background: #000;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 1000;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #f5e6d3;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(180, 140, 100, 0.03) 0px, transparent 1px, transparent 2px, rgba(180, 140, 100, 0.03) 3px),
+                repeating-linear-gradient(0deg, rgba(180, 140, 100, 0.03) 0px, transparent 1px, transparent 2px, rgba(180, 140, 100, 0.03) 3px);
+        }
+
+        .screen-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .screen-content.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .header {
+            background: #1a3a3a;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #d4a574;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .home-logo {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .home-logo h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 48px;
+            color: #3d2817;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .home-logo .subtitle {
+            font-size: 18px;
+            color: #5c4033;
+            margin-bottom: 40px;
+        }
+
+        .ribbon-btn {
+            background: #5c4033;
+            color: #d4a574;
+            padding: 15px 40px;
+            border: 3px solid #3d2817;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: 1.5px;
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+
+        .ribbon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #3d2817;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #3d2817;
+            border-radius: 8px;
+            background: #f5e6d3;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            color: #3d2817;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .character-card {
+            border: 3px solid #5c4033;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            background: #f5e6d3;
+            transition: all 0.3s;
+        }
+
+        .character-card:hover {
+            border-color: #1a3a3a;
+            box-shadow: 0 4px 12px rgba(26, 58, 58, 0.3);
+        }
+
+        .character-card.selected {
+            border-color: #1a3a3a;
+            border-width: 4px;
+            box-shadow: 0 4px 12px rgba(26, 58, 58, 0.5);
+        }
+
+        .character-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(26, 58, 58, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .character-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: #3d2817;
+            margin-bottom: 5px;
+        }
+
+        .character-desc {
+            font-size: 9px;
+            color: #5c4033;
+            line-height: 1.3;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: #d32f2f;
+            clip-path: polygon(50% 100%, 0% 20%, 0% 0%, 100% 0%, 100% 20%);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .map-marker:hover {
+            transform: scale(1.2);
+        }
+
+        .map-marker.completed {
+            background: #4caf50;
+        }
+
+        .user-location {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #2196f3;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 8px rgba(33, 150, 243, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(33, 150, 243, 0); }
+        }
+
+        .wallet-balance {
+            background: rgba(92, 64, 51, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .wallet-balance h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #3d2817;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .token-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #5c4033;
+            border: 3px solid #d4a574;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .transaction-list {
+            background: rgba(245, 230, 211, 0.5);
+            border: 2px solid #5c4033;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .transaction-item {
+            padding: 15px;
+            border-bottom: 1px solid #5c4033;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 25px;
+        }
+
+        .nav-btn {
+            width: 12px;
+            height: 12px;
+            background: #666;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.active {
+            background: #d4a574;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .scrollwork {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0.2;
+        }
+
+        .scrollwork.tl { top: 0; left: 0; }
+        .scrollwork.tr { top: 0; right: 0; transform: scaleX(-1); }
+        .scrollwork.bl { bottom: 0; left: 0; transform: scaleY(-1); }
+        .scrollwork.br { bottom: 0; right: 0; transform: scale(-1); }
+
+        .token-display {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #5c4033;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #d4a574;
+            color: #d4a574;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        .riddle-box {
+            background: rgba(26, 58, 58, 0.1);
+            border: 3px solid #5c4033;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .riddle-box h3 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #3d2817;
+            margin-bottom: 15px;
+        }
+
+        .riddle-text {
+            font-style: italic;
+            color: #5c4033;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #fff8e1;
+            border-left: 4px solid #d4a574;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="screen">
+            
+            <!-- Home Screen -->
+            <div class="screen-content active" id="screen-home">
+                <div class="content" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <div class="home-logo">
+                        <h1>SAINT<br>HUNT</h1>
+                        <p class="subtitle">⚓ GPS Scavenger Hunt ⚓</p>
+                        <p style="font-size: 12px; color: #5c4033; margin-bottom: 30px;">
+                            St. Augustine, Florida
+                        </p>
+                        <button class="ribbon-btn" onclick="showScreen('signup')">SIGN UP</button>
+                        <button class="ribbon-btn" onclick="showScreen('login')">LOG IN</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sign Up Screen -->
+            <div class="screen-content" id="screen-signup">
+                <div class="header">
+                    <h1>SAINT HUNT</h1>
+                </div>
+                <div class="content">
+                    <div style="background: #5c4033; color: #d4a574; padding: 12px; border-radius: 8px; text-align: center; margin: 20px 0; border: 2px solid #3d2817; font-weight: bold; letter-spacing: 1.5px;">
+                        SIGN UP
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="Enter your phone">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter password">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" placeholder="Confirm password">
+                    </div>
+                    
+                    <div style="margin: 20px 0; font-size: 12px;">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the Terms of Use & Privacy Policy</label>
+                    </div>
+                    
+                    <button class="ribbon-btn" style="width: 100%;" onclick="showScreen('characters')">SIGN UP</button>
+                    
+                    <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #5c4033; cursor: pointer;" onclick="showScreen('home')">
+                        Already have an account? Log in
+                    </p>
+                </div>
+            </div>
+
+            <!-- Login Screen -->
+            <div class="screen-content" id="screen-login">
+                <div class="header">
+                    <h1>SAINT HUNT</h1>
+                </div>
+                <div class="content" style="display: flex; flex-direction: column; justify-content: center;">
+                    <div style="background: #5c4033; color: #d4a574; padding: 12px; border-radius: 8px; text-align: center; margin: 20px 0; border: 2px solid #3d2817; font-weight: bold; letter-spacing: 1.5px;">
+                        LOG IN
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter password">
+                    </div>
+                    
+                    <p style="text-align: right; font-size: 12px; color: #5c4033; cursor: pointer; margin-bottom: 20px;">
+                        Forgot Password?
+                    </p>
+                    
+                    <button class="ribbon-btn" style="width: 100%;" onclick="showScreen('map')">LOG IN</button>
+                    
+                    <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #5c4033; cursor: pointer;" onclick="showScreen('signup')">
+                        Don't have an account? Sign up
+                    </p>
+                </div>
+            </div>
+
+            <!-- Character Selection -->
+            <div class="screen-content" id="screen-characters">
+                <div class="header">
+                    <h1>CHOOSE YOUR PIRATE</h1>
+                </div>
+                <div class="content">
+                    <div class="character-grid">
+                        <div class="character-card" onclick="selectCharacter(this)">
+                            <div class="character-icon">☠️</div>
+                            <div class="character-name">Skull Pirate</div>
+                            <div class="character-desc">Fearsome undead captain</div>
+                        </div>
+                        <div class="character-card" onclick="selectCharacter(this)">
+                            <div class="character-icon">⚓</div>
+                            <div class="character-name">Quartermaster</div>
+                            <div class="character-desc">Rugged pirate with hook</div>
+                        </div>
+                        <div class="character-card" onclick="selectCharacter(this)">
+                            <div class="character-icon">👻</div>
+                            <div class="character-name">Ghost Captain</div>
+                            <div class="character-desc">Spectral seafarer</div>
+                        </div>
+                        <div class="character-card" onclick="selectCharacter(this)">
+                            <div class="character-icon">🐢</div>
+                            <div class="character-name">Salty Turtle</div>
+                            <div class="character-desc">Slow and steady</div>
+                        </div>
+                        <div class="character-card" onclick="selectCharacter(this)">
+                            <div class="character-icon">🧛</div>
+                            <div class="character-name">Vampire Pirate</div>
+                            <div class="character-desc">Undead bloodsucker</div>
+                        </div>
+                        <div class="character-card" onclick="selectCharacter(this)">
+                            <div class="character-icon">🧝</div>
+                            <div class="character-name">Elf Swashbuckler</div>
+                            <div class="character-desc">Daring and quick</div>
+                        </div>
+                    </div>
+                    
+                    <button class="ribbon-btn" style="width: 100%; margin-top: 20px;" onclick="showScreen('map')">START HUNT</button>
+                </div>
+            </div>
+
+            <!-- Map Screen -->
+            <div class="screen-content" id="screen-map">
+                <div class="header">
+                    <h1>SAINT HUNT</h1>
+                    <div class="token-display">⭐ 0</div>
+                </div>
+                <div class="content" style="padding: 10px;">
+                    <div class="map-container">
+                        <!-- User location -->
+                        <div class="user-location" style="top: 50%; left: 50%;"></div>
+                        
+                        <!-- Location markers -->
+                        <div class="map-marker" style="top: 30%; left: 40%;" onclick="showScreen('riddle')" title="Castillo de San Marcos"></div>
+                        <div class="map-marker" style="top: 50%; left: 50%;" onclick="showScreen('riddle')" title="St. George Street"></div>
+                        <div class="map-marker completed" style="top: 60%; left: 30%;" title="Completed"></div>
+                        <div class="map-marker" style="top: 40%; left: 70%;" onclick="showScreen('riddle')" title="Pirate Museum"></div>
+                        <div class="map-marker" style="top: 70%; left: 60%;" onclick="showScreen('riddle')" title="Lighthouse"></div>
+                    </div>
+                    
+                    <div class="info-box" style="margin-top: 15px;">
+                        <strong>📍 Current Location:</strong> St. Augustine Historic District<br>
+                        <strong>🎯 Nearby Location:</strong> Castillo de San Marcos (0.2 mi)
+                    </div>
+                    
+                    <button class="ribbon-btn" style="width: 100%; margin-top: 10px;" onclick="showScreen('wallet')">
+                        VIEW WALLET
+                    </button>
+                </div>
+            </div>
+
+            <!-- Riddle Screen -->
+            <div class="screen-content" id="screen-riddle">
+                <div class="header">
+                    <h1>CASTILLO DE SAN MARCOS</h1>
+                </div>
+                <div class="content">
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="width: 100px; height: 100px; background: #1a3a3a; border: 4px solid #d4a574; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 50px;">
+                            🏰
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; color: #5c4033; margin-bottom: 20px;">
+                        The oldest masonry fort in the continental United States
+                    </p>
+                    
+                    <div class="riddle-box">
+                        <h3>Solve the Riddle</h3>
+                        <p class="riddle-text">
+                            Built of coquina stone, I've stood for centuries long. 
+                            Spanish soldiers once manned my walls so strong. 
+                            What am I?
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(92, 64, 51, 0.3); padding: 15px; border-radius: 8px; text-align: center; margin: 15px 0;">
+                        ⭐ <strong>Reward: 25 Tokens</strong>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Your Answer</label>
+                        <input type="text" placeholder="Enter your answer">
+                    </div>
+                    
+                    <button class="ribbon-btn" style="width: 100%;" onclick="solveRiddle()">SUBMIT ANSWER</button>
+                    
+                    <button class="ribbon-btn" style="width: 100%; background: #999; margin-top: 10px;" onclick="showScreen('map')">
+                        BACK TO MAP
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallet Screen -->
+            <div class="screen-content" id="screen-wallet">
+                <div class="header">
+                    <h1>Saint Hunt</h1>
+                </div>
+                <div class="content">
+                    <h2 style="text-align: center; font-family: 'Cinzel Decorative', serif; color: #3d2817; margin: 20px 0;">
+                        Wallet
+                    </h2>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <span class="token-icon"></span>
+                        <span style="font-size: 28px; font-weight: bold; color: #3d2817;">200 Tokens</span>
+                    </div>
+                    
+                    <div class="wallet-balance">
+                        <h2>Token Balance</h2>
+                        <div>
+                            <span class="token-icon"></span>
+                            <span style="font-size: 36px; font-weight: bold; color: #3d2817;">200</span>
+                        </div>
+                    </div>
+                    
+                    <h3 style="font-family: 'Cinzel Decorative', serif; color: #3d2817; margin: 20px 0;">
+                        Recent Redemptions
+                    </h3>
+                    
+                    <div class="transaction-list">
+                        <div class="transaction-item">
+                            <div style="display: flex; align-items: center;">
+                                <div class="token-icon" style="width: 30px; height: 30px;"></div>
+                                <div style="margin-left: 10px;">
+                                    <div style="font-weight: bold; font-size: 14px;">Crucial Coffee</div>
+                                    <div style="font-size: 11px; color: #5c4033;">Today</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: bold; color: #8b0000;">-20</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div style="display: flex; align-items: center;">
+                                <div class="token-icon" style="width: 30px; height: 30px;"></div>
+                                <div style="margin-left: 10px;">
+                                    <div style="font-weight: bold; font-size: 14px;">Salty Turtle</div>
+                                    <div style="font-size: 11px; color: #5c4033;">3 days ago</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: bold; color: #8b0000;">-30</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div style="display: flex; align-items: center;">
+                                <div class="token-icon" style="width: 30px; height: 30px;"></div>
+                                <div style="margin-left: 10px;">
+                                    <div style="font-weight: bold; font-size: 14px;">The Sweet Spot</div>
+                                    <div style="font-size: 11px; color: #5c4033;">8 days ago</div>
+                                </div>
+                            </div>
+                            <div style="font-weight: bold; color: #8b0000;">-15</div>
+                        </div>
+                    </div>
+                    
+                    <button class="ribbon-btn" style="width: 100%; margin-top: 20px;" onclick="showScreen('map')">
+                        BACK TO MAP
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-buttons">
+        <button class="nav-btn active" onclick="showScreen('home')"></button>
+        <button class="nav-btn" onclick="showScreen('signup')"></button>
+        <button class="nav-btn" onclick="showScreen('characters')"></button>
+        <button class="nav-btn" onclick="showScreen('map')"></button>
+        <button class="nav-btn" onclick="showScreen('wallet')"></button>
+    </div>
+
+    <script>
+        function showScreen(screenName) {
+            // Hide all screens
+            document.querySelectorAll('.screen-content').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show selected screen
+            document.getElementById('screen-' + screenName).classList.add('active');
+            
+            // Update nav dots
+            const screens = ['home', 'signup', 'characters', 'map', 'wallet'];
+            const index = screens.indexOf(screenName);
+            document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+
+        function selectCharacter(card) {
+            document.querySelectorAll('.character-card').forEach(c => {
+                c.classList.remove('selected');
+            });
+            card.classList.add('selected');
+        }
+
+        function solveRiddle() {
+            alert('🎉 Correct! You earned 25 tokens!\n\n' +
+                  'Historical Fact: Built by the Spanish in 1672, this fort has never been taken by force. ' +
+                  'It\'s made from coquina, a unique stone composed of ancient shells.');
+            showScreen('map');
+            // Update token count
+            document.querySelector('.token-display').innerHTML = '⭐ 25';
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for content areas
+            document.querySelectorAll('.content').forEach(content => {
+                content.style.scrollBehavior = 'smooth';
+            });
+        });
+    </script>
+</body>
+</html>
+

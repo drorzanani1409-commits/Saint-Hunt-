@@ -1,0 +1,188 @@
+[
+  {
+    "name": "Crucial Coffee",
+    "description": "Artisan coffee shop serving locally roasted beans and fresh pastries",
+    "latitude": 29.8950,
+    "longitude": -81.3128,
+    "category": "cafe",
+    "iconPath": "assets/images/tokens/coffee.png",
+    "offers": [
+      {
+        "id": "coffee_free",
+        "title": "Free Coffee",
+        "description": "Get a free regular coffee of your choice",
+        "tokenCost": 20,
+        "isActive": true
+      },
+      {
+        "id": "coffee_discount",
+        "title": "50% Off Any Drink",
+        "description": "Half off any beverage on the menu",
+        "tokenCost": 15,
+        "isActive": true
+      }
+    ],
+    "operatingHours": {
+      "Monday": "7:00 AM - 6:00 PM",
+      "Tuesday": "7:00 AM - 6:00 PM",
+      "Wednesday": "7:00 AM - 6:00 PM",
+      "Thursday": "7:00 AM - 6:00 PM",
+      "Friday": "7:00 AM - 8:00 PM",
+      "Saturday": "8:00 AM - 8:00 PM",
+      "Sunday": "8:00 AM - 6:00 PM"
+    },
+    "phoneNumber": "(904) 555-0100",
+    "website": "www.crucialcoffee.com",
+    "address": "45 St. George Street, St. Augustine, FL 32084",
+    "isActive": true
+  },
+  {
+    "name": "Salty Turtle",
+    "description": "Fresh seafood restaurant with ocean views",
+    "latitude": 29.8945,
+    "longitude": -81.3115,
+    "category": "restaurant",
+    "iconPath": "assets/images/tokens/turtle.png",
+    "offers": [
+      {
+        "id": "turtle_appetizer",
+        "title": "Free Appetizer",
+        "description": "Complimentary appetizer with any entree purchase",
+        "tokenCost": 30,
+        "isActive": true
+      },
+      {
+        "id": "turtle_dessert",
+        "title": "Free Dessert",
+        "description": "Enjoy a sweet ending on the house",
+        "tokenCost": 20,
+        "isActive": true
+      }
+    ],
+    "operatingHours": {
+      "Monday": "11:00 AM - 10:00 PM",
+      "Tuesday": "11:00 AM - 10:00 PM",
+      "Wednesday": "11:00 AM - 10:00 PM",
+      "Thursday": "11:00 AM - 10:00 PM",
+      "Friday": "11:00 AM - 11:00 PM",
+      "Saturday": "11:00 AM - 11:00 PM",
+      "Sunday": "11:00 AM - 10:00 PM"
+    },
+    "phoneNumber": "(904) 555-0200",
+    "website": "www.saltyturtle.com",
+    "address": "89 Avenida Menendez, St. Augustine, FL 32084",
+    "isActive": true
+  },
+  {
+    "name": "The Sweet Spot",
+    "description": "Old-fashioned candy store and ice cream parlor",
+    "latitude": 29.8952,
+    "longitude": -81.3130,
+    "category": "shop",
+    "iconPath": "assets/images/tokens/candy.png",
+    "offers": [
+      {
+        "id": "sweet_icecream",
+        "title": "Free Ice Cream Cone",
+        "description": "One scoop of your favorite flavor",
+        "tokenCost": 15,
+        "isActive": true
+      },
+      {
+        "id": "sweet_candy",
+        "title": "$5 Candy Bag",
+        "description": "Fill a bag with your favorite candies",
+        "tokenCost": 10,
+        "isActive": true
+      }
+    ],
+    "operatingHours": {
+      "Monday": "10:00 AM - 9:00 PM",
+      "Tuesday": "10:00 AM - 9:00 PM",
+      "Wednesday": "10:00 AM - 9:00 PM",
+      "Thursday": "10:00 AM - 9:00 PM",
+      "Friday": "10:00 AM - 10:00 PM",
+      "Saturday": "10:00 AM - 10:00 PM",
+      "Sunday": "10:00 AM - 9:00 PM"
+    },
+    "phoneNumber": "(904) 555-0300",
+    "website": "www.thesweetspot-staugustine.com",
+    "address": "52 St. George Street, St. Augustine, FL 32084",
+    "isActive": true
+  },
+  {
+    "name": "Pirate's Cove Souvenirs",
+    "description": "Unique gifts and souvenirs with a pirate theme",
+    "latitude": 29.8958,
+    "longitude": -81.3125,
+    "category": "shop",
+    "iconPath": "assets/images/tokens/chest.png",
+    "offers": [
+      {
+        "id": "pirate_discount",
+        "title": "20% Off Purchase",
+        "description": "Save 20% on your entire purchase",
+        "tokenCost": 25,
+        "isActive": true
+      },
+      {
+        "id": "pirate_item",
+        "title": "Free Pirate Bandana",
+        "description": "Get a free pirate bandana with any purchase",
+        "tokenCost": 15,
+        "isActive": true
+      }
+    ],
+    "operatingHours": {
+      "Monday": "9:00 AM - 8:00 PM",
+      "Tuesday": "9:00 AM - 8:00 PM",
+      "Wednesday": "9:00 AM - 8:00 PM",
+      "Thursday": "9:00 AM - 8:00 PM",
+      "Friday": "9:00 AM - 9:00 PM",
+      "Saturday": "9:00 AM - 9:00 PM",
+      "Sunday": "9:00 AM - 8:00 PM"
+    },
+    "phoneNumber": "(904) 555-0400",
+    "website": "www.piratescove.com",
+    "address": "78 St. George Street, St. Augustine, FL 32084",
+    "isActive": true
+  },
+  {
+    "name": "Colonial Tavern",
+    "description": "Historic tavern serving traditional fare and craft beers",
+    "latitude": 29.8940,
+    "longitude": -81.3132,
+    "category": "restaurant",
+    "iconPath": "assets/images/tokens/mug.png",
+    "offers": [
+      {
+        "id": "tavern_beer",
+        "title": "Free Draft Beer",
+        "description": "Complimentary pint of any draft beer",
+        "tokenCost": 20,
+        "isActive": true
+      },
+      {
+        "id": "tavern_meal",
+        "title": "$10 Off Meal",
+        "description": "Save $10 on your food order",
+        "tokenCost": 35,
+        "isActive": true
+      }
+    ],
+    "operatingHours": {
+      "Monday": "11:00 AM - 11:00 PM",
+      "Tuesday": "11:00 AM - 11:00 PM",
+      "Wednesday": "11:00 AM - 11:00 PM",
+      "Thursday": "11:00 AM - 11:00 PM",
+      "Friday": "11:00 AM - 12:00 AM",
+      "Saturday": "11:00 AM - 12:00 AM",
+      "Sunday": "11:00 AM - 11:00 PM"
+    },
+    "phoneNumber": "(904) 555-0500",
+    "website": "www.colonialtavern.com",
+    "address": "36 Charlotte Street, St. Augustine, FL 32084",
+    "isActive": true
+  }
+]
+

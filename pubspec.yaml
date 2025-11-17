@@ -1,0 +1,62 @@
+name: saint_hunt
+description: A GPS-based scavenger hunt app for tourists in St. Augustine, Florida
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & State Management
+  cupertino_icons: ^1.0.6
+  provider: ^6.1.1
+  
+  # Firebase
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+  firebase_storage: ^11.5.6
+  
+  # Maps & Location
+  google_maps_flutter: ^2.5.0
+  geolocator: ^10.1.0
+  geocoding: ^2.1.1
+  
+  # Utilities
+  intl: ^0.18.1
+  shared_preferences: ^2.2.2
+  uuid: ^4.2.1
+  http: ^1.1.2
+  
+  # QR Code
+  qr_flutter: ^4.1.0
+  qr_code_scanner: ^1.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/characters/
+    - assets/images/tokens/
+    - assets/images/backgrounds/
+  
+  fonts:
+    - family: Cinzel
+      fonts:
+        - asset: assets/fonts/Cinzel-Regular.ttf
+        - asset: assets/fonts/Cinzel-Bold.ttf
+          weight: 700
+    - family: CinzelDecorative
+      fonts:
+        - asset: assets/fonts/CinzelDecorative-Bold.ttf
+          weight: 700
+
