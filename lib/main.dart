@@ -14,8 +14,8 @@ const bool USE_3D_MAP = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase
-  await Firebase.initializeApp();
+  // Initialize Firebase - Temporarily commented out
+  // await Firebase.initializeApp();
   
   runApp(const SaintHuntApp());
 }
