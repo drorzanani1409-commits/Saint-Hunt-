@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.sainthunt.saint_hunt"
-    compileSdk 34
+    compileSdk 36
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -45,7 +45,7 @@ android {
     defaultConfig {
         applicationId "com.sainthunt.saint_hunt"
         minSdk 21
-        targetSdk 34
+        targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

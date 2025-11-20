@@ -33,7 +33,8 @@ dependencies:
   
   # QR Code
   qr_flutter: ^4.1.0
-  qr_code_scanner: ^1.0.1
+  # qr_code_scanner temporarily disabled - incompatible with AGP 8.x
+  # qr_code_scanner: ^1.0.1
 
 dev_dependencies:
   flutter_test:
