@@ -132,7 +132,7 @@ class AppTheme {
         ),
       ),
       
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppConstants.parchment,
         elevation: 2,
         shape: RoundedRectangleBorder(
