@@ -13,6 +13,9 @@ workflows:
       - name: Get Flutter packages
         script: |
           flutter packages pub get
+      - name: Set executable permissions for gradlew
+        script: |
+          chmod +x android/gradlew
       - name: Build Android APK
         script: |
           flutter build apk --release

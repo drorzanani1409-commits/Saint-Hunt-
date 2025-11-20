@@ -70,15 +70,14 @@ api_keys.dart
 **/.generated/
 
 # Android
-**/android/**/gradle-wrapper.jar
 **/android/.gradle
 **/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+
+# NOTE: Gradle wrapper files are NOT ignored - they're needed for builds
 
 # Coverage
 coverage/
